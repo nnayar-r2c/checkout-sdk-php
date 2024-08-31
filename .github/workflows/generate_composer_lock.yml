@@ -25,6 +25,12 @@ jobs:
     - name: Install Composer
       run: composer install --no-scripts --no-interaction --prefer-dist
 
+    - name: Upload LockFiles    
+      uses: actions/upload-artifact@v3
+      with:
+        name: lockfile
+        path: '**/composer.lock'
+
     - name: Commit composer.lock if it changed
       run: |
         if [ -n "$(git status --porcelain)" ]; then
